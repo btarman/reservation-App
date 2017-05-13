@@ -22,7 +22,7 @@
                         <span class="glyphicon glyphicon-credit-card">
                         </span> Make Reservation</button>
                 </a>
-                <a href="/home">
+                <a href="/">
                     <button type="button" class="btn btn-lg">
                         <span class="glyphicon glyphicon-home"></span></button>
                 </a>
@@ -53,5 +53,31 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript">
+    $.get("/api/reservations", function(data) {
+      for (var i = 0; i < data.length; i++) {
+        var wellSection = $("<div>");
+        wellSection.addClass("well");
+        wellSection.attr("id", "reservation-well-" + i);
+        $("#tableSection").append(wellSection);
+        $("#reservation-well-" + i).append("<h2>" + data[i].name + "</h2>");
+        $("#reservation-well-" + i).append("<h3>Phone Number: " + data[i].phone + "</h3>");
+        $("#reservation-well-" + i).append("<h3>Email: " + data[i].email + "</h3>");
+        $("#reservation-well-" + i).append("<h3>Id: " + data[i].id + "</h3>");
+      }
+    });
+    $.get("/api/waitlist", function(data){
+        for (var i = 0; i < data.length; i++) {
+            var waitSection = $("<div>");
+            waitSection.addClass("well");
+            waitSection.attr("id", "waitsection-well-" + i);
+            $("#waitlistSection").append(waitSection);
+            $("#waitsection-well-" + i).append("<h2>" + data[i].name + "</h2>");
+            $("#waitsection-well-" + i).append("<h3>Phone Number: " + data[i].phone + "</h3>");
+            $("#waitsection-well-" + i).append("<h3>Email: " + data[i].phone + "</h3>");
+            $("#waitsection-well-" + i).append("<h3>Id: " + data[i].id + "</h3>");
+        }
+    });
+  </script>
 </body>
 </html>
